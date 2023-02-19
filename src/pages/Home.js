@@ -3,6 +3,7 @@ import youtube from "../api/youtube";
 import List from "../components/List";
 import Navbar from "../components/Navbar";
 import Search from "../components/Search";
+import Sidebar from "../components/Sidebar";
 import Player from "../Player";
 
 const HomePage = () => {
@@ -35,15 +36,20 @@ const HomePage = () => {
 
   return (
     <>
-      <Navbar />
-      <div className="flex justify-center items-center">
+      {/* <Navbar /> */}
+      <div className="flex justify-center items-center mb-3">
         <Search onSubmitProps={onSubmit} />
       </div>
-      <div className="grid grid-rows-5 grid-flow-col gap-3  max-w-7xl mx-auto">
-        <List onVideoSelect={onVideoSelect} videos={searchApi.videos} />
-      </div>
-      <div className="container mx-auto">
-        <Player video={searchApi.selectVideo} />
+      <div className="flex px-5">
+        <Sidebar />
+        <>
+          <div className="grid grid-rows-5 grid-flow-col gap-3  max-w-7xl mx-auto">
+            <List onVideoSelect={onVideoSelect} videos={searchApi.videos} />
+          </div>
+          <div className="container mx-auto">
+            <Player video={searchApi.selectVideo} />
+          </div>
+        </>
       </div>
     </>
   );

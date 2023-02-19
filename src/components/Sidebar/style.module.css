@@ -1,0 +1,9 @@
+.sidebar{
+    @apply  min-w-[200px] bg-white
+}
+.flexStructure {
+    @apply flex items-center my-5 p-2 hover:bg-[#F2F2F2] cursor-pointer
+}
+.activeFlex {
+    @apply flex items-center my-5 bg-[#F2F2F2]  p-2 cursor-pointer
+}
