@@ -4,8 +4,14 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import Style from "./style.module.css";
 import { AiOutlineVideoCameraAdd } from "react-icons/ai";
 import { IoNotificationsOffOutline } from "react-icons/io5";
+import { useSelector, useDispatch } from "react-redux";
+import { changeDarkMode } from "../../store/slice/darkModeSlice";
+import { BsSun, BsMoon } from "react-icons/bs";
 
 const Search = ({ onSubmitProps }) => {
+  const darkMode = useSelector((state) => state.darkMode.value);
+  const dispatch = useDispatch();
+  console.log("dark mode", darkMode);
   const [term, setTerm] = useState("");
 
   const submitForm = (event) => {
@@ -14,12 +20,15 @@ const Search = ({ onSubmitProps }) => {
   };
 
   return (
-    <form onSubmit={submitForm} className={Style.search}>
+    <form
+      onSubmit={submitForm}
+      className={darkMode ? Style.darkMode : Style.search}
+    >
       <div className={Style.flexStructure}>
-        <RxHamburgerMenu size={30} className="mr-3 text-black" />
+        <RxHamburgerMenu size={30} className="mr-3 " />
         <div className={Style.flexStructure}>
           <IoLogoYoutube size={30} className="text-red-500" />
-          <h3 className="text-black font-bold ml-2">Premium</h3>
+          <h3 className=" font-bold ml-2">Premium</h3>
         </div>
       </div>
       <div className="flex-1">
@@ -32,8 +41,11 @@ const Search = ({ onSubmitProps }) => {
         />
       </div>
       <div className={Style.flexStructure}>
-        <AiOutlineVideoCameraAdd size={30} className="mr-3 text-black" />
-        <IoNotificationsOffOutline size={30} className="text-black" />
+        <button onClick={() => dispatch(changeDarkMode())}>
+          {darkMode ? <BsSun size={30} /> : <BsMoon size={30} />}
+        </button>
+        <AiOutlineVideoCameraAdd size={30} className="mx-3 " />
+        <IoNotificationsOffOutline size={30} />
       </div>
     </form>
   );
