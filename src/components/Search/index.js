@@ -7,9 +7,11 @@ import { IoNotificationsOffOutline } from "react-icons/io5";
 import { useSelector, useDispatch } from "react-redux";
 import { changeDarkMode } from "../../store/slice/darkModeSlice";
 import { BsSun, BsMoon } from "react-icons/bs";
+import { changeNavbarHidden } from "../../store/slice/navbarHidden";
 
 const Search = ({ onSubmitProps }) => {
   const darkMode = useSelector((state) => state.darkMode.value);
+  const navbarHidden = useSelector((state) => state.navbarHidden.value);
   const dispatch = useDispatch();
   console.log("dark mode", darkMode);
   const [term, setTerm] = useState("");
@@ -25,7 +27,11 @@ const Search = ({ onSubmitProps }) => {
       className={darkMode ? Style.darkMode : Style.search}
     >
       <div className={Style.flexStructure}>
-        <RxHamburgerMenu size={30} className="mr-3 " />
+        <RxHamburgerMenu
+          size={30}
+          className="mr-3 cursor-pointer"
+          onClick={() => dispatch(changeNavbarHidden())}
+        />
         <div className={Style.flexStructure}>
           <IoLogoYoutube size={30} className="text-red-500" />
           <h3 className=" font-bold ml-2">Premium</h3>
