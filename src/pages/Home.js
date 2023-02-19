@@ -43,7 +43,7 @@ const HomePage = () => {
       <div className="flex px-5">
         <Sidebar />
         <>
-          <div className="grid grid-rows-5 grid-flow-col gap-3  max-w-7xl mx-auto">
+          <div className="flex flex-wrap max-w-7xl mx-auto">
             <List onVideoSelect={onVideoSelect} videos={searchApi.videos} />
           </div>
           <div className="container mx-auto">

@@ -3,7 +3,10 @@ import Style from "./style.module.css";
 import { AiOutlineHome } from "react-icons/ai";
 import { MdOutlineSubscriptions } from "react-icons/md";
 import { TbPlayerPlay } from "react-icons/tb";
+import { useSelector } from "react-redux";
+
 const Sidebar = () => {
+  const navbarHidden = useSelector((state) => state.navbarHidden.value);
   const [clicked, setClicked] = useState({
     activeNumber: 1,
   });
@@ -30,7 +33,7 @@ const Sidebar = () => {
     },
   ];
   return (
-    <div className={Style.sidebar}>
+    <div className={navbarHidden ? Style.sidebar : Style.active}>
       {sidebar.map((item) => (
         <div
           className={
@@ -41,7 +44,7 @@ const Sidebar = () => {
           onClick={() => setClicked({ activeNumber: item.activeNumber })}
         >
           {item.icon}
-          <h4 className="ml-2">{item.title}</h4>
+          {navbarHidden ? <h4 className="ml-2">{item.title}</h4> : null}
         </div>
       ))}
     </div>
