@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
-import youtube from "../api/youtube";
+import { useDispatch, useSelector } from "react-redux";
 import List from "../components/List";
-import Navbar from "../components/Navbar";
 import Search from "../components/Search";
 import Sidebar from "../components/Sidebar";
 import Player from "../Player";
+import { fetchVideo, onSelectVideoItem } from "../store/slice/videoSlice";
 
 const HomePage = () => {
+  const { videoList, videoSelect } = useSelector((state) => state.videoSection);
+  const dispatc = useDispatch();
+  console.log("video category", videoList);
   const [searchApi, setSearchApi] = useState({
     videos: [],
     selectVideo: null,
@@ -17,15 +20,7 @@ const HomePage = () => {
   }, []);
 
   const onSubmit = async (term) => {
-    const response = await youtube.get("/search", {
-      params: {
-        q: term,
-      },
-    });
-    setSearchApi({
-      videos: response?.data?.items,
-      selectVideo: response?.data?.items[0],
-    });
+    await dispatc(fetchVideo(term));
   };
 
   const onVideoSelect = (video) => {
@@ -42,14 +37,14 @@ const HomePage = () => {
       </div>
       <div className="flex px-5">
         <Sidebar />
-        <>
+        <div className="flex">
           <div className="flex flex-wrap max-w-7xl mx-auto">
-            <List onVideoSelect={onVideoSelect} videos={searchApi.videos} />
+            <List onVideoSelect={onVideoSelect} videos={videoList.items} />
           </div>
           <div className="container mx-auto">
-            <Player video={searchApi.selectVideo} />
+            {searchApi.selectVideo && <Player video={searchApi.selectVideo} />}
           </div>
-        </>
+        </div>
       </div>
     </>
   );

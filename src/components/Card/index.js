@@ -1,7 +1,6 @@
 import React from "react";
 
 const Card = ({ video, onVideoSelect }) => {
-  console.log("video", video);
   return (
     <div
       key={video.etag}

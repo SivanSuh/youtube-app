@@ -11,7 +11,6 @@ import { changeNavbarHidden } from "../../store/slice/navbarHidden";
 
 const Search = ({ onSubmitProps }) => {
   const darkMode = useSelector((state) => state.darkMode.value);
-  const navbarHidden = useSelector((state) => state.navbarHidden.value);
   const dispatch = useDispatch();
   console.log("dark mode", darkMode);
   const [term, setTerm] = useState("");
@@ -47,9 +46,9 @@ const Search = ({ onSubmitProps }) => {
         />
       </div>
       <div className={Style.flexStructure}>
-        <button onClick={() => dispatch(changeDarkMode())}>
+        <div onClick={() => dispatch(changeDarkMode())}>
           {darkMode ? <BsSun size={30} /> : <BsMoon size={30} />}
-        </button>
+        </div>
         <AiOutlineVideoCameraAdd size={30} className="mx-3 " />
         <IoNotificationsOffOutline size={30} />
       </div>
