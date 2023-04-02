@@ -1,4 +1,3 @@
-import React from "react";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import youtube from "../../api/youtube";
 
@@ -20,7 +19,7 @@ const videoSlice = createSlice({
   initialState,
   reducers: {
     onSelectVideoItem: (state, action) => {
-      console.log("selected video");
+      state.videoSelect = action.payload;
     },
   },
   extraReducers: (builder) => {
